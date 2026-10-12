@@ -32,7 +32,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
-      secure: false, // Local HTTP development ke liye
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax"
     }
   })
@@ -56,8 +56,4 @@ app.use((req, res) => {
   });
   
 
-app.listen(process.env.PORT, () => {
-  console.log("Server running on port 5000");
-});
-
-export default app
+  export default app;
