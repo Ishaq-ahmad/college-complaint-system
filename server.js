@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import express from "express";
 import session from "express-session";
 import expressLayouts from "express-ejs-layouts";
@@ -8,25 +10,16 @@ import connectDB from "./configs/mongoDB.js";
 
 const app = express();
 
-
-
-import 'dotenv/config'
-
 app.set("view engine", "ejs");
+app.set("views", "./views");
 
-// Database
-await connectDB();
-
-// General middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
 
-// Session middleware
 app.use(
   session({
     name: "college_cms_sid",
-    secret: process.env.SESSION_SECRET || "college-cms-secret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -38,22 +31,28 @@ app.use(
   })
 );
 
-// Layout setup
 app.use(expressLayouts);
 app.set("layout", "layouts/main");
 
-// Student routes
 app.use("/", studentRoutes);
-
-// Admin routes
 app.use("/admin", adminRoutes);
 
 app.use((req, res) => {
-    res.status(404).render("auth/404", {
-      title: "404 - Page Not Found",
-      layout: false
-    });
+  res.status(404).render("auth/404", {
+    title: "404 - Page Not Found",
+    layout: false
   });
-  
+});
 
-  export default app;
+// Confirm DB connection before handling a request.
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("MongoDB connection failed:", error);
+    res.status(500).send("Database connection failed");
+  }
+});
+
+export default app;
