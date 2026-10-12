@@ -53,10 +53,7 @@ export const loginPageData = async (req, res) => {
         return res.status(500).send("Session could not be saved");
       }
 
-      // Redirect according to role
-      if (userExist.role === "admin") {
-        return res.redirect("/admin");
-      }
+     
 
       if (userExist.role === "student") {
         return res.redirect("/dashboard");
