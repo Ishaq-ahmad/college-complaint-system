@@ -1,0 +1,181 @@
+<div class="min-h-screen bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-4xl">
+    <!-- Header -->
+    <div class="mb-8">
+      <a
+        href="/complaints"
+        class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-blue-600"
+      >
+        <span class="text-lg leading-none">←</span>
+        Back to My Complaints
+      </a>
+
+      <div class="mt-6">
+        <p
+          class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-600"
+        >
+          Complaint Management
+        </p>
+
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">
+          Submit a Complaint
+        </h1>
+
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
+          Please provide the details of your complaint below. Clear information
+          helps us understand and resolve your issue faster.
+        </p>
+      </div>
+    </div>
+
+    <!-- Form Card -->
+    <div
+      class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+    >
+      <!-- Form Header -->
+      <div class="border-b border-slate-200 bg-slate-50/60 px-6 py-5 sm:px-8">
+        <h2 class="text-base font-semibold text-slate-900">
+          Complaint Details
+        </h2>
+
+        <p class="mt-1 text-sm text-slate-500">
+          Fill in the information related to your complaint.
+        </p>
+      </div>
+
+      <% if (typeof errors !== "undefined" && errors.length > 0) { %>
+      <div class="mb-5 rounded-xl border border-red-200 bg-red-50 p-4">
+        <p class="mb-2 font-semibold text-red-700">
+          Please correct the following errors:
+        </p>
+
+        <ul class="list-inside list-disc space-y-1 text-sm text-red-600">
+          <% errors.forEach((error) => { %>
+          <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+      <% } %>
+
+      <!-- Form -->
+      <form action="/new-complaint" method="POST" class="p-6 sm:p-8">
+        <div class="space-y-7">
+          <!-- Complaint Title -->
+          <div>
+            <label
+              for="title"
+              class="mb-2 block text-sm font-semibold text-slate-800"
+            >
+              Complaint Title
+              <span class="ml-0.5 text-red-500">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter complaint title"
+              class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-50"
+            />
+
+            <p class="mt-2 text-xs text-slate-400">
+              Use a short title that clearly describes the issue.
+            </p>
+          </div>
+
+          <!-- Category -->
+          <div>
+            <label
+              for="category"
+              class="mb-2 block text-sm font-semibold text-slate-800"
+            >
+              Complaint Category
+              <span class="ml-0.5 text-red-500">*</span>
+            </label>
+
+            <select
+              id="category"
+              name="category"
+              class="w-full cursor-pointer appearance-none rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-50"
+            >
+              <option value="">Select a category</option>
+              <option value="Academic">Academic</option>
+              <option value="Hostel">Hostel</option>
+              <option value="Administration">Administration</option>
+              <option value="IT">IT</option>
+              <option value="Fees">Fees</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <p class="mt-2 text-xs text-slate-400">
+              Choose the category that best matches your complaint.
+            </p>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <div class="mb-2 flex items-center justify-between">
+              <label
+                for="description"
+                class="block text-sm font-semibold text-slate-800"
+              >
+                Complaint Description
+                <span class="ml-0.5 text-red-500">*</span>
+              </label>
+
+              <span class="text-xs text-slate-400"> Required </span>
+            </div>
+
+            <textarea
+              id="description"
+              name="description"
+              rows="7"
+              placeholder="Describe your complaint in detail..."
+              class="w-full resize-y rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-6 text-slate-800 placeholder-slate-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-50"
+            ></textarea>
+
+            <p class="mt-2 text-xs text-slate-400">
+              Include useful details such as location, date, or other relevant
+              information if applicable.
+            </p>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div
+          class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-end"
+        >
+          <a
+            href="/complaints"
+            class="rounded-lg border border-slate-300 px-5 py-2.5 text-center text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-50"
+          >
+            Cancel
+          </a>
+
+          <button
+            type="submit"
+            class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-100"
+          >
+            Submit Complaint
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Small Help Note -->
+    <div
+      class="mt-5 flex gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3.5"
+    >
+      <div
+        class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-semibold text-blue-600"
+      >
+        i
+      </div>
+
+      <p class="text-xs leading-5 text-slate-500">
+        Please make sure the information you provide is accurate. Your complaint
+        will be reviewed by the appropriate department.
+      </p>
+    </div>
+  </div>
+</div>

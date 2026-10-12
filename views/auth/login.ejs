@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College CMS | Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="min-h-screen bg-slate-100 flex items-center justify-center p-5">
+    <div
+      class="grid w-full max-w-5xl overflow-hidden rounded-xl bg-white shadow-xl md:grid-cols-2"
+    >
+      <!-- Left Side: Campus Image -->
+      <div class="relative hidden min-h-[550px] md:block">
+        <img
+          src="https://images.unsplash.com/photo-1660644807924-85fec223ed5c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTF8fGhhY2tlcnN8ZW58MHx8MHx8fDA%3D"
+          alt="College Campus"
+          class="absolute inset-0 h-full w-full object-cover object-center"
+        />
+
+        <div class="absolute inset-0 bg-blue-950/20"></div>
+
+        <div class="absolute left-8 top-8 rounded-full bg-white p-3 shadow">
+          <span class="text-xl font-bold text-blue-800">CMS</span>
+        </div>
+
+        <div class="absolute bottom-8 left-8 text-white">
+          <h1 class="text-3xl font-bold">College CMS</h1>
+          <p class="mt-2 text-sm">Complaint Management System</p>
+        </div>
+      </div>
+
+      <!-- Right Side: Login Form -->
+      <div class="flex min-h-[550px] flex-col justify-center p-8 sm:p-12">
+        <div class="mb-8 text-right text-xs text-slate-500">
+          College Complaint Management System
+        </div>
+
+        <div class="mb-8 text-center">
+          <h2 class="text-2xl font-bold text-slate-800">Welcome Back</h2>
+          <p class="mt-2 text-sm text-slate-500">
+            Please login to your account
+          </p>
+        </div>
+
+        <form action="/login" method="POST" class="space-y-5">
+          <!-- Role -->
+          <div>
+            <label
+              for="role"
+              class="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Select Your Role
+            </label>
+
+            <select
+              id="role"
+              name="role"
+              required
+              class="w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            >
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <!-- Username -->
+          <div>
+            <label
+              for="username"
+              class="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Username
+            </label>
+
+            <input
+              type="text"
+              id="username"
+              name="email"
+              placeholder="Enter your username"
+              required
+              class="w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label
+              for="password"
+              class="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Password
+            </label>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              class="w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
+
+          <!-- Forgot Password -->
+          <div class="text-right">
+            <a href="#" class="text-xs text-blue-600 hover:underline">
+              Forgot Password?
+            </a>
+          </div>
+
+          <!-- Login Button -->
+          <button
+            type="submit"
+            class="w-full rounded-md bg-blue-700 py-3 text-sm font-semibold text-white transition hover:bg-blue-800"
+          >
+            Login
+          </button>
+        </form>
+
+        <!-- Footer -->
+        <div class="mt-6 text-center text-sm text-slate-500">
+          <p id="registerText">
+            Don't have an account?
+            <a
+              href="/register"
+              class="font-semibold text-blue-600 hover:underline"
+            >
+              Register
+            </a>
+          </p>
+
+          <p class="mt-5 text-xs text-slate-400">
+            Developed & Maintained by College IT Department
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Show Register link only for students -->
+    <script>
+      const roleSelect = document.getElementById("role");
+      const registerText = document.getElementById("registerText");
+
+      function updateRegisterLink() {
+        registerText.style.display =
+          roleSelect.value === "student" ? "block" : "none";
+      }
+
+      roleSelect.addEventListener("change", updateRegisterLink);
+      updateRegisterLink();
+    </script>
+  </body>
+</html>

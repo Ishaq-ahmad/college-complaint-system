@@ -1,0 +1,167 @@
+<div class="min-h-screen bg-slate-50 px-5 py-7 sm:px-8 lg:px-10">
+  <div class="mx-auto max-w-5xl">
+    <!-- Back Button -->
+    <a
+      href="/complaints"
+      class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-blue-600"
+    >
+      <span class="text-lg leading-none">←</span>
+      Back to My Complaints
+    </a>
+
+    <!-- Page Heading -->
+    <div class="mt-6 mb-7">
+      <p
+        class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-600"
+      >
+        Complaint Management
+      </p>
+
+      <h1
+        class="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl"
+      >
+        Complaint Details
+      </h1>
+
+      <p class="mt-2 text-sm text-slate-500">
+        Review the information and current status of your complaint.
+      </p>
+    </div>
+
+    <!-- Details -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <!-- Complaint Information -->
+      <div
+        class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm lg:col-span-2"
+      >
+        <!-- Card Header -->
+        <div class="border-b border-slate-200 bg-slate-50/60 px-6 py-5 sm:px-7">
+          <h2 class="text-base font-semibold text-slate-900">
+            Complaint Information
+          </h2>
+
+          <p class="mt-1 text-sm text-slate-500">
+            Details submitted with your complaint.
+          </p>
+        </div>
+
+        <!-- Information -->
+        <div class="px-6 py-6 sm:px-7">
+          <div class="space-y-0">
+            <!-- Title -->
+            <div
+              class="grid grid-cols-1 gap-2 py-5 first:pt-0 sm:grid-cols-4 sm:gap-6"
+            >
+              <p class="text-[17px] font-semibold text-slate-700">Title</p>
+
+              <p class="text-[15px] leading-6 text-slate-700 sm:col-span-3">
+                <%= complaint.title %>
+              </p>
+            </div>
+
+            <hr class="border-slate-100" />
+
+            <!-- Category -->
+            <div class="grid grid-cols-1 gap-2 py-5 sm:grid-cols-4 sm:gap-6">
+              <p class="text-[17px] font-semibold text-slate-700">Category</p>
+
+              <p class="text-[15px] leading-6 text-slate-600 sm:col-span-3">
+                <%= complaint.category %>
+              </p>
+            </div>
+
+            <hr class="border-slate-100" />
+
+            <!-- Description -->
+            <div class="grid grid-cols-1 gap-2 py-5 sm:grid-cols-4 sm:gap-6">
+              <p class="text-[17px] font-semibold text-slate-700">
+                Description
+              </p>
+
+              <p
+                class="whitespace-pre-line text-[15px] leading-7 text-slate-600 sm:col-span-3"
+              >
+                <%= complaint.description %>
+              </p>
+            </div>
+
+            <hr class="border-slate-100" />
+
+            <!-- Status -->
+            <div
+              class="grid grid-cols-1 gap-2 py-5 sm:grid-cols-4 sm:items-center sm:gap-6"
+            >
+              <p class="text-[17px] font-semibold text-slate-700">Status</p>
+
+              <div class="sm:col-span-3">
+                <span
+                  class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold <%= complaint.status === 'Pending' ? 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' : complaint.status === 'Rejected' ? 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-200' : complaint.status === 'Resolved' ? 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' : 'bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200' %>"
+                >
+                  <span
+                    class="h-1.5 w-1.5 rounded-full <%= complaint.status === 'Pending' ? 'bg-amber-500' : complaint.status === 'Rejected' ? 'bg-red-500' : complaint.status === 'Resolved' ? 'bg-emerald-500' : 'bg-slate-400' %>"
+                  ></span>
+
+                  <%= complaint.status %>
+                </span>
+              </div>
+            </div>
+
+            <hr class="border-slate-100" />
+
+            <!-- Date -->
+            <div
+              class="grid grid-cols-1 gap-2 py-5 last:pb-0 sm:grid-cols-4 sm:gap-6"
+            >
+              <p class="text-[17px] font-semibold text-slate-700">Date</p>
+
+              <p class="text-[15px] leading-6 text-slate-600 sm:col-span-3">
+                <%= new Date(complaint.createdAt).toLocaleDateString("en-GB") %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side Status Card -->
+      <div class="h-fit rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="border-b border-slate-200 px-5 py-4">
+          <h3 class="text-sm font-semibold text-slate-900">Current Status</h3>
+        </div>
+
+        <div class="px-5 py-5">
+          <div class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-4">
+            <p
+              class="text-xs font-medium uppercase tracking-wide text-slate-400"
+            >
+              Status
+            </p>
+
+            <div class="mt-2">
+              <span
+                class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold <%= complaint.status === 'Pending' ? 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' : complaint.status === 'Rejected' ? 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-200' : complaint.status === 'Resolved' ? 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' : 'bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200' %>"
+              >
+                <span
+                  class="h-1.5 w-1.5 rounded-full <%= complaint.status === 'Pending' ? 'bg-amber-500' : complaint.status === 'Rejected' ? 'bg-red-500' : complaint.status === 'Resolved' ? 'bg-emerald-500' : 'bg-slate-400' %>"
+                ></span>
+
+                <%= complaint.status %>
+              </span>
+            </div>
+          </div>
+
+          <p class="mt-4 text-xs leading-5 text-slate-500">
+            Your complaint is being handled by the relevant department. You can
+            return to your complaints list to view other submissions.
+          </p>
+
+          <a
+            href="/complaints"
+            class="mt-5 flex w-full items-center justify-center rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+          >
+            Back to Complaints
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
