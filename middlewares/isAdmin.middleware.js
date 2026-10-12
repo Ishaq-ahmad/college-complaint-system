@@ -1,4 +1,4 @@
-import { User } from "../models/user.model.js";
+
 
 export const authenticated = (req, res, next) => {
     if (!req.session.user_id) {
