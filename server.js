@@ -9,6 +9,8 @@ import adminRoutes from "./routes/admin.route.js";
 import connectDB from "./configs/mongoDB.js";
 
 const app = express();
+await connectDB();
+
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -44,15 +46,6 @@ app.use((req, res) => {
   });
 });
 
-// Confirm DB connection before handling a request.
-app.use(async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (error) {
-    console.error("MongoDB connection failed:", error);
-    res.status(500).send("Database connection failed");
-  }
-});
+
 
 export default app;

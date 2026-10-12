@@ -14,9 +14,7 @@ export const loginPage = (req, res) => {
 
 export const loginPageData = async (req, res) => {
   try {
-
       const { role, email, password } = req.body;
-
       // Find user
       const userExist = await User.findOne({ email });
 
@@ -79,7 +77,7 @@ export const loginPageData = async (req, res) => {
 
       return res.status(500).json({
           success: false,
-          message: error.message
+          message: `Something went wrong , ${ error.message}`
       });
   }
 };
