@@ -40,7 +40,6 @@ try {
       user: {
         name: req.session.user_name,
         role: req.session.role,
-        name: req.session.user_name
       },
       total_complaints,
       complaints

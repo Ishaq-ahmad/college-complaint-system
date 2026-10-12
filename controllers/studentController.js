@@ -12,73 +12,66 @@ export const loginPage = (req, res) => {
 
 // ======== POST  Login Page Data ========
 
+
 export const loginPageData = async (req, res) => {
   try {
-      const { role, email, password } = req.body;
-      // Find user
-      const userExist = await User.findOne({ email });
+    const { email, password } = req.body;
 
-      if (!userExist) {
-          return res.status(400).json({
-              success: false,
-              message: "User does not exist"
-          });
+    // Find user by email
+    const userExist = await User.findOne({ email });
+
+    if (!userExist) {
+      return res.status(400).json({
+        success: false,
+        message: "User does not exist"
+      });
+    }
+
+    // Check password
+    const isMatch = await bcrypt.compare(
+      password,
+      userExist.password
+    );
+
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Password does not match"
+      });
+    }
+
+    // Save user information in session
+    req.session.user_id = userExist._id.toString();
+    req.session.role = userExist.role;
+    req.session.user_name = userExist.name;
+
+    // Wait until session is saved before redirecting
+    req.session.save((err) => {
+      if (err) {
+        console.error("Session Save Error:", err);
+
+        return res.status(500).send("Session could not be saved");
       }
 
-      // Check password
-      const isMatch = await bcrypt.compare(
-          password,
-          userExist.password
-      );
-
-      if (!isMatch) {
-          return res.status(400).json({
-              success: false,
-              message: "Password does not match"
-          });
+      // Redirect according to role
+      if (userExist.role === "admin") {
+        return res.redirect("/admin");
       }
 
-      // Save user in session
-      req.session.user_id = userExist._id.toString();
-      req.session.role = userExist.role;
-      req.session.user_name = userExist.name;
+      if (userExist.role === "student") {
+        return res.redirect("/dashboard");
+      }
 
-
-      req.session.save((err) => {
-        if (err) {
-            console.error("Session Save Error:", err);
-    
-            return res.status(500).json({
-                success: false,
-                message: "Session could not be saved"
-            });
-        }
+      return res.status(400).send("Invalid user role");
     });
 
-
-      // Student
-      if (userExist.role === "student") {
-          return res.redirect("/dashboard");
-      }
-
-      // Admin
-      if (userExist.role === "admin") {
-          return res.redirect("/admin/dashboard");
-      }
-
-      return res.status(400).json({
-          success: false,
-          message: "Invalid user role"
-      });
-
   } catch (error) {
+    console.error("Login Error:", error);
 
-      console.error("Login Error:", error);
-
-      return res.status(500).json({
-          success: false,
-          message: `Something went wrong , ${ error.message}`
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong during login"
+    });
   }
 };
 
