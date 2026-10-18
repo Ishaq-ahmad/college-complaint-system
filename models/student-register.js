@@ -6,6 +6,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      validate(value) {
+        if (value.length < 3 && value.length > 15) {
+          throw new Error("Name must be between 3 and 15 characters.");
+        }
+      },
+
+
     },
 
     email: {
@@ -14,17 +21,25 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
       lowercase: true,
+    
+      
     },
 
     password: {
       type: String,
       required: true,
+      trim: true,
+      validate(value) {
+       
+    
+      },
     },
 
     role: {
       type: String,
       enum: ["student", "admin"],
       default: "student",
+      
     },
   },
   {
@@ -35,3 +50,7 @@ const userSchema = new mongoose.Schema(
 const User = mongoose.model("User", userSchema);
 
 export default User;
+
+
+
+// # MONGO_URI=mongodb://localhost:27017/complaint-project

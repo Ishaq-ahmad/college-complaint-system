@@ -4,9 +4,9 @@ import express from "express";
 import session from "express-session";
 import expressLayouts from "express-ejs-layouts";
 
-import studentRoutes from "./routes/student.route.js";
-import adminRoutes from "./routes/admin.route.js";
-import connectDB from "./configs/mongoDB.js";
+import studentRoutes from "../routes/student.route.js";
+import adminRoutes from "../routes/admin.route.js";
+import connectDB from "../configs/mongoDB.js";
 
 const app = express();
 await connectDB();
@@ -46,8 +46,8 @@ app.use((req, res) => {
   });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
-});
+// app.listen(process.env.PORT, () => {
+//   console.log(`Server is running on port ${process.env.PORT}`);
+// });
 
 export default app;
