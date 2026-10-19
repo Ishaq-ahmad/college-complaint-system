@@ -1,15 +1,12 @@
+
 import mongoose from "mongoose";
 
 const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 10000
-    });
 
-    console.log("MongoDB Atlas connected successfully");
+  try {
+    await mongoose.connect(process.env.MONGO_URI).then(() => {console.log("MongoDB connected")});
   } catch (error) {
-    console.error("MongoDB Atlas connection failed:", error.message);
-    throw error;
+    console.error("MongoDB connection failed:", error.message);
   }
 };
 
