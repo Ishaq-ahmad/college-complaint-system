@@ -11,9 +11,17 @@ import connectDB from "../configs/mongoDB.js";
 const app = express();
 await connectDB();
 
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// api/server.js se project root tak
+const rootDir = path.join(__dirname, "..");
+
+app.set("views", path.join(rootDir, "views"));
 app.set("view engine", "ejs");
-app.set("views", "./views");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
