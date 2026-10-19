@@ -15,10 +15,6 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.static("views"));
 
-app.use((req, res, next) => {
-  res.locals.user = req.session.user;
-  next();
-});
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -38,6 +34,19 @@ app.use(
     }
   })
 );
+
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user_id
+    ? {
+        _id: req.session.user_id,
+        name: req.session.user_name,
+        role: req.session.role
+      }
+    : null;
+
+  next();
+});
 
 app.use(expressLayouts);
 app.set("layout", "layouts/main");
