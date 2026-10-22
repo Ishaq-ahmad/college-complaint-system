@@ -4,9 +4,9 @@ import express from "express";
 import session from "express-session";
 import expressLayouts from "express-ejs-layouts";
 
-import studentRoutes from "../routes/student.route.js";
-import adminRoutes from "../routes/admin.route.js";
-import connectDB from "../configs/mongoDB.js";
+import studentRoutes from "./routes/student.route.js";
+import adminRoutes from "./routes/admin.route.js";
+import connectDB from "./configs/mongoDB.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -14,9 +14,7 @@ import { fileURLToPath } from "url";
 const app = express();
 await connectDB();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const rootDir = path.join(__dirname, "..");
+
 
 app.set("views", path.join(rootDir, "views"));
 app.set("view engine", "ejs");
