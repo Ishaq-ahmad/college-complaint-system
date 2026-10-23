@@ -74,7 +74,7 @@ export const loginPageData = async (req, res) => {
       }
 
       if (userExist.role === "admin") {
-        return res.redirect("/admin/dashboard");
+        return res.redirect("/admin/admin-dashboard");
       }
 
       return res.redirect("/dashboard");
