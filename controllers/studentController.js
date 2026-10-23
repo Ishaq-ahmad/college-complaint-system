@@ -140,7 +140,7 @@ try {
   await user.save();
 
 
-  return res.redirect('/views/auth/login');
+  return res.redirect('/login');
 
 } catch (error) {
    res.status(500).json({message: error.message})

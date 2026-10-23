@@ -19,7 +19,7 @@ export const adminDashboard = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.redirect('/views/auth/404.ejs')
+    res.redirect('/admin/404');
     
   }
 

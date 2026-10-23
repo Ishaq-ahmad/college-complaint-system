@@ -1,6 +1,6 @@
 
 import bcrypt from "bcryptjs";
-import User from "../models/user.model.js";
+import User from "../models/student-register.js";
 
 
 export const loginPageData = async (req, res) => {
@@ -63,10 +63,10 @@ export const loginPageData = async (req, res) => {
         }
   
         if (userExist.role === "admin") {
-            return res.redirect("/admin/admin-dashboard");
+            return res.redirect("/admin/dashboard");
           }
         
-          return res.redirect("/login");
+          return res.redirect("/dashboard");
         
       });
   
