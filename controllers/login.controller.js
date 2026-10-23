@@ -1,7 +1,6 @@
 
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
-import Complaint from "../models/complaint.model.js";
 
 
 export const loginPageData = async (req, res) => {
@@ -64,10 +63,10 @@ export const loginPageData = async (req, res) => {
         }
   
         if (userExist.role === "admin") {
-            return res.redirect("/admin/dashboard");
+            return res.redirect("/admin/admin-dashboard");
           }
         
-          return res.redirect("/dashboard");
+          return res.redirect("/login");
         
       });
   
