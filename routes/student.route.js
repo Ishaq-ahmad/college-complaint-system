@@ -3,7 +3,7 @@ import express from "express";
 import {
   dashboard,
   loginPage,
-  loginPageData,
+  // loginPageData,
   registerPage,
   registerPageData,
   complaints,
@@ -13,6 +13,11 @@ import {
   LogOut,
   profile
 } from "../controllers/studentController.js";
+
+import {
+  loginPageData
+} from "../controllers/login.controller.js";
+
 
 import { landingPage } from "../controllers/landing_page.controller.js";
 
