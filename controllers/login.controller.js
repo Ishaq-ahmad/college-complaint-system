@@ -64,10 +64,11 @@ export const loginPageData = async (req, res) => {
         }
   
         if (userExist.role === "admin") {
-          return res.render("admin/admin-dashboard");
-        }
-  
-        return res.redirect("/dashboard");
+            return res.redirect("/admin/dashboard");
+          }
+        
+          return res.redirect("/dashboard");
+        
       });
   
     } catch (error) {
