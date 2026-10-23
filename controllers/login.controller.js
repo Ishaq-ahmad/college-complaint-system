@@ -51,6 +51,10 @@ export const loginPageData = async (req, res) => {
       req.session.user_id = userExist._id.toString();
       req.session.role = userExist.role;
       req.session.user_name = userExist.name;
+
+
+      console.log("LOGIN USER:", userExist.email);
+console.log("DATABASE ROLE:", userExist.role);
   
       req.session.save((err) => {
         if (err) {
@@ -61,8 +65,15 @@ export const loginPageData = async (req, res) => {
             message: "Could not save login session"
           });
         }
+
+        console.log("SESSION BEFORE SAVE:", req.session);
+
+        console.log("SESSION SAVED:");
+        console.log("user_id:", req.session.user_id);
+        console.log("role:", req.session.role);
   
         if (userExist.role === "admin") {
+            console.log("REDIRECTING ADMIN...");
             return res.redirect("/admin/dashboard");
           }
         
