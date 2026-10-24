@@ -326,7 +326,7 @@ export const LogOut = (req, res) => {
   
 
   
-  return res.redirect("/login");
+  return res.redirect("/views/landing-page");
  
   
   });

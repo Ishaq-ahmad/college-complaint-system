@@ -1,5 +1,5 @@
 
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import User from "../models/student-register.js";
 
 
