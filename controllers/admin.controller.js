@@ -17,10 +17,10 @@ export const adminDashboard = async (req, res) => {
       total_complaints,
       complaints
     });
-  } catch (error) {
-    console.log(error);
-    res.redirect('/admin/404');
-    
+  }catch (error) {
+    console.error("ADMIN DASHBOARD ERROR:", error);
+  
+    return res.status(500).send("Admin dashboard failed. Check server logs.");
   }
 
   };

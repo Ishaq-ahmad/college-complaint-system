@@ -17,8 +17,20 @@ import {
 const router = express.Router();
 
 // Admin Dashboard
+// router.get(
+//   "/dashboard",
+//   authenticated,
+//   isAdmin,
+//   adminDashboard
+// );
+
 router.get(
   "/dashboard",
+  (req, res, next) => {
+    console.log("ADMIN DASHBOARD ROUTE HIT");
+    console.log("SESSION:", req.session);
+    next();
+  },
   authenticated,
   isAdmin,
   adminDashboard
