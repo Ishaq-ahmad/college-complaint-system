@@ -5,7 +5,7 @@ const complaintSchema = new mongoose.Schema(
         // Student who submitted the complaint
         student: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+            ref: "Users",
            
         },
 
