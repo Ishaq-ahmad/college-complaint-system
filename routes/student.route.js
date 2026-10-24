@@ -25,6 +25,7 @@ import { authenticated } from "../middlewares/isAdmin.middleware.js";
 import { isStudent } from "../middlewares/isStudent.middleware.js";
 import { checkComplaintValidation } from "../middlewares/check_validation.js";
 import { complaintValidation } from "../validator/complaint.validator.js";
+import { registerValidation } from "../validator/register.validator.js";
 const router = express.Router();
 
 // Public routes
@@ -32,7 +33,7 @@ router.get("/", landingPage);
 router.get("/login", loginPage);
 router.post("/login", loginPageData);
 router.get("/register", registerPage);
-router.post("/register",   registerPageData);
+router.post("/register", registerValidation , registerPageData);
 
 // Protected student routes
 router.get("/dashboard", authenticated, isStudent, dashboard);

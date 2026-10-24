@@ -6,7 +6,7 @@ export const complaintValidation = [
     .notEmpty()
     .withMessage("Complaint title is required.")
     .bail()
-    .isLength({ min: 5, max: 15 })
+    .isLength({ min: 5, max: 20 })
     .withMessage("Title must be between 5 and 15 characters."),
 
   body("category")
