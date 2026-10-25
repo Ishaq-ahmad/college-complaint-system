@@ -57,7 +57,7 @@
             <div>
               <label
                 for="name"
-                class="mb-1 mt-2 block text-sm font-medium text-slate-700"
+                class="mb-[7px] mt-[12px] block text-sm font-medium text-slate-700"
               >
                 Full name
               </label>
@@ -76,7 +76,7 @@
             <div>
               <label
                 for="email"
-                class="mb-1 mt-2 block text-sm font-medium text-slate-700"
+                class="mb-[7px] mt-[12px] block text-sm font-medium text-slate-700"
               >
                 Email address
               </label>
@@ -95,7 +95,7 @@
             <div>
               <label
                 for="password"
-                class="mb-2 block text-sm font-medium text-slate-700"
+                class="mb-[7px] mt-[12px] block text-sm font-medium text-slate-700"
               >
                 Password
               </label>
@@ -114,7 +114,7 @@
             <div>
               <label
                 for="confirmPassword"
-                class="mb-2 block text-sm font-medium text-slate-700"
+                class="mb-[7px] mt-[12px] block text-sm font-medium text-slate-700"
               >
                 Confirm password
               </label>
@@ -135,7 +135,7 @@
                 type="checkbox"
                 id="terms"
                 name="terms"
-                class="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-700 focus:ring-blue-600"
+                class="mt-[7px] mt-[12px] h-4 w-4 rounded border-slate-300 text-blue-700 focus:ring-blue-600"
               />
 
               <label for="terms" class="text-xs leading-5 text-slate-500">
@@ -152,20 +152,6 @@
               Create account
             </button>
           </form>
-
-          <!-- Login -->
-          <div class="mt-6 border-t border-slate-100 pt-5 text-center">
-            <p class="text-sm text-slate-500">
-              Already have an account?
-
-              <a
-                href="/login"
-                class="font-medium text-blue-700 hover:text-blue-900"
-              >
-                Sign in
-              </a>
-            </p>
-          </div>
         </div>
 
         <% if (typeof errors !== "undefined" && errors.length > 0) { %>
