@@ -9,6 +9,11 @@ import {
   registerUser
 } from "../controllers/admin.controller.js";
 
+
+import { registerValidation } from "../validator/register.validator.js";
+import {  checkRegisterValidation } from "../middlewares/check_validation.js";
+import { registerValidation } from "../validator/register.validator.js";
+
 import {
   isAdmin,
   authenticated
@@ -71,5 +76,5 @@ router.get('/404', (req, res)=> {
 
 
 router.get('/register', registerUserPage)
-router.post('/register', registerUser)
+router.post('/register', registerValidation   ,checkRegisterValidation, registerUser)
 export default router;
