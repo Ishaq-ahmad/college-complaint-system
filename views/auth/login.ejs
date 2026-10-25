@@ -137,19 +137,5 @@
         </div>
       </div>
     </div>
-
-    <!-- Show Register link only for students -->
-    <script>
-      const roleSelect = document.getElementById("role");
-      const registerText = document.getElementById("registerText");
-
-      function updateRegisterLink() {
-        registerText.style.display =
-          roleSelect.value === "student" ? "block" : "none";
-      }
-
-      roleSelect.addEventListener("change", updateRegisterLink);
-      updateRegisterLink();
-    </script>
   </body>
 </html>

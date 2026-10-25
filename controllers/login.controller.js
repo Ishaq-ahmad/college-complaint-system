@@ -66,14 +66,9 @@ console.log("DATABASE ROLE:", userExist.role);
           });
         }
 
-        console.log("SESSION BEFORE SAVE:", req.session);
-
-        console.log("SESSION SAVED:");
-        console.log("user_id:", req.session.user_id);
-        console.log("role:", req.session.role);
+     
   
         if (userExist.role === "admin") {
-            console.log("REDIRECTING ADMIN...");
             return res.redirect("/admin/dashboard");
           }
         
