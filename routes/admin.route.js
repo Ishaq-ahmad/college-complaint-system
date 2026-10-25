@@ -12,7 +12,6 @@ import {
 
 import { registerValidation } from "../validator/register.validator.js";
 import {  checkRegisterValidation } from "../middlewares/check_validation.js";
-import { registerValidation } from "../validator/register.validator.js";
 
 import {
   isAdmin,

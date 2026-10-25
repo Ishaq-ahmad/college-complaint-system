@@ -1,9 +1,9 @@
 import express from "express";
+const router = express.Router();
 
 import {
   dashboard,
   loginPage,
- 
   complaints,
   newComplaintPage,
   newComplaint,
@@ -23,7 +23,7 @@ import { authenticated } from "../middlewares/isAdmin.middleware.js";
 import { isStudent } from "../middlewares/isStudent.middleware.js";
 import { checkComplaintValidation } from "../middlewares/check_validation.js";
 import { complaintValidation } from "../validator/complaint.validator.js";
-const router = express.Router();
+
 
 // Public routes
 router.get("/", landingPage);
