@@ -10,63 +10,6 @@ export const loginPage = (req, res) => {
     });
 };
 
-// export const registerPage = (req, res) => {
-
-//     res.render("students/register", {
-       
-//         title: "Student Register",
-       
-//         layout: false
-//     });
-// };
-
-
-
-// //  ==========  POST  Registration page Data =============
-// export const registerPageData= async (req, res)=>{
-// try {
-  
-//   const {name, email, password, confirmPassword} = req.body;
-
-//  if(password != confirmPassword){
-//  return  res.status(400).json({
-//         success: false, message: 'Password does not match'})
-//  }
-//   //  hash password 
-//   const passwordHash = await bcrypt.hash(password, 12);
-
-//   // find user 
-//   const existingUser= await User.findOne({email})
-//   if (existingUser){
-//   return res.status(400).json({
-//         success: false, message: 'User already exist'})
-//   }
-
-
-
-//   // save data in schema / collection
-//   const user = new User({
-//     name,
-//     email,
-//     password: passwordHash
-//   });
-
-
-
-//   // save data in db
-//   await user.save();
-
-
-//   return res.redirect('/login');
-
-// } catch (error) {
-//    res.status(500).json({message: error.message})
-// }
- 
-
- 
-
-// }
 
 
 export const dashboard = async(req, res) => {

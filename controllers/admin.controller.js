@@ -1,5 +1,6 @@
 import User from "../models/student-register.js";
 import Complaint from "../models/complaint.model.js";
+import bcrypt from "bcrypt";
 export const adminDashboard = async (req, res) => {
 
   try {
@@ -151,47 +152,52 @@ export const registerUserPage = (req, res) => {
 
 // register user 
 
-export const registerUser= async (req, res)=>{
+
+export const registerUser = async (req, res) => {
   try {
-    
-    const {name, email, password, confirmPassword} = req.body;
-  
-   if(password != confirmPassword){
-   return  res.status(400).json({
-          success: false, message: 'Password does not match'})
-   }
-    //  hash password 
-    const passwordHash = await bcrypt.hash(password, 12);
-  
-    // find user 
-    const existingUser= await User.findOne({email})
-    if (existingUser){
-    return res.status(400).json({
-          success: false, message: 'User already exist'})
+    const { name, email, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      return res.status(400).render("admin/registerUser", {
+        title: "Student Register",
+        layout: false,
+        error: "Passwords do not match."
+      });
     }
-  
-  
-  
-    // save data in schema / collection
-    const user = new User({
-      name,
-      email,
-      password: passwordHash
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const existingUser = await User.findOne({
+      email: normalizedEmail
     });
-  
-  
-  
-    // save data in db
+
+    if (existingUser) {
+      return res.status(400).render("admin/registerUser", {
+        title: "Student Register",
+        layout: false,
+        error: "An account with this email already exists."
+      });
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    const user = new User({
+      name: name.trim(),
+      email: normalizedEmail,
+      password: passwordHash,
+      role: "student"
+    });
+
     await user.save();
-  
-  
-    return res.status(201).json({ message: "User registered successfully!", user });
-  
+
+    return res.redirect("/admin/all-students");
   } catch (error) {
-     res.status(500).json({message: error.message})
+    console.error("Register User Error:", error);
+
+    return res.status(500).render("admin/registerUser", {
+      title: "Student Register",
+      layout: false,
+      error: "Unable to create the student account. Please try again."
+    });
   }
-   
-  
-   
-  
-  }
+};

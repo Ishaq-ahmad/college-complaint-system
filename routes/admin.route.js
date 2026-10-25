@@ -75,6 +75,6 @@ router.get('/404', (req, res)=> {
 
 
 
-router.get('/register', registerUserPage)
-router.post('/register', registerValidation   ,checkRegisterValidation, registerUser)
+router.get('/register',isAdmin,authenticated, registerUserPage)
+router.post('/register', registerValidation   ,checkRegisterValidation,isAdmin, authenticated, registerUser)
 export default router;
