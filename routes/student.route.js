@@ -4,8 +4,6 @@ import {
   dashboard,
   loginPage,
   // loginPageData,
-  registerPage,
-  registerPageData,
   complaints,
   newComplaintPage,
   newComplaint,
