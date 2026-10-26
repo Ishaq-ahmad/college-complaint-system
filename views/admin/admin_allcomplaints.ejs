@@ -1,75 +1,80 @@
+```ejs
 <!-- Main Content -->
-<section class="min-h-screen bg-slate-50 px-5 py-7 sm:px-8">
-  <div class="mx-auto max-w-7xl">
+<section class="min-h-screen bg-slate-50 px-3 py-5 sm:px-6 sm:py-7 lg:px-8">
+  <div class="mx-auto w-full max-w-7xl min-w-0">
     <!-- Page Heading -->
-    <div class="mb-7">
+    <div class="mb-6 sm:mb-7">
       <p
         class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-600"
       >
         Administration
       </p>
 
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-900">
+      <h2
+        class="break-words text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
+      >
         <%= title %>
       </h2>
 
-      <p class="mt-1.5 text-sm text-slate-500">
+      <p class="mt-1.5 text-sm leading-6 text-slate-500">
         Track and manage complaints submitted by students.
       </p>
     </div>
 
     <!-- Complaints Table -->
     <div
-      class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+      class="min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
     >
       <!-- Table Header -->
-      <div
-        class="flex flex-col gap-2 border-b border-slate-200 px-5 py-5 sm:px-6"
-      >
+      <div class="border-b border-slate-200 px-4 py-4 sm:px-6 sm:py-5">
         <h3 class="text-base font-semibold text-slate-900">
           Complaint Records
         </h3>
 
-        <p class="text-sm text-slate-500">
+        <p class="mt-1 text-sm leading-5 text-slate-500">
           Review submitted complaints and open a complaint to manage its status.
         </p>
       </div>
 
-      <!-- Table -->
-      <div class="overflow-x-auto">
-        <table class="w-full min-w-[950px] text-left text-sm">
+      <!-- Responsive Table -->
+      <div class="w-full overflow-x-auto">
+        <table class="w-full min-w-[760px] text-left text-sm">
+          <!-- Table Heading -->
           <thead class="border-b border-slate-200 bg-slate-50/70">
             <tr class="text-xs uppercase tracking-wide text-slate-500">
-              <th class="px-6 py-3.5 font-semibold">#</th>
-
-              <th class="px-6 py-3.5 font-semibold">Student</th>
-
-              <th class="px-6 py-3.5 font-semibold">Title</th>
-
-              <th class="px-6 py-3.5 font-semibold">Category</th>
-
-              <th class="px-6 py-3.5 font-semibold">Status</th>
-
-              <th class="px-6 py-3.5 font-semibold">Date</th>
-
-              <th class="px-6 py-3.5 text-right font-semibold">Action</th>
+              <th class="whitespace-nowrap px-4 py-3.5 font-semibold sm:px-5">
+                #
+              </th>
+              <th class="px-4 py-3.5 font-semibold sm:px-5">Student</th>
+              <th class="px-4 py-3.5 font-semibold sm:px-5">Title</th>
+              <th class="px-4 py-3.5 font-semibold sm:px-5">Category</th>
+              <th class="px-4 py-3.5 font-semibold sm:px-5">Status</th>
+              <th class="whitespace-nowrap px-4 py-3.5 font-semibold sm:px-5">
+                Date
+              </th>
+              <th
+                class="whitespace-nowrap px-4 py-3.5 text-right font-semibold sm:px-5"
+              >
+                Action
+              </th>
             </tr>
           </thead>
 
+          <!-- Table Data -->
           <tbody class="divide-y divide-slate-100 text-slate-700">
-            <!-- Complaint 1 -->
-
             <% complaints.forEach((compl, idx) => { %>
 
-            <tr class="transition hover:bg-slate-50/80">
+            <tr class="transition-colors hover:bg-slate-50/80">
               <!-- Number -->
-              <td class="px-6 py-4 text-sm font-medium text-slate-400">
+              <td
+                class="whitespace-nowrap px-4 py-4 font-medium text-slate-400 sm:px-5"
+              >
                 <%= idx + 1 %>
               </td>
 
               <!-- Student -->
-              <td class="px-6 py-4">
-                <div class="flex items-center gap-3">
+              <td class="px-4 py-4 sm:px-5">
+                <div class="flex items-center gap-2.5">
                   <div
                     class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-semibold text-slate-600"
                   >
@@ -84,38 +89,39 @@
               </td>
 
               <!-- Title -->
-              <td class="max-w-[260px] px-6 py-4">
+              <td class="max-w-[220px] px-4 py-4 sm:px-5">
                 <p class="truncate font-medium text-slate-800">
                   <%= compl.title %>
                 </p>
               </td>
 
               <!-- Category -->
-              <td class="px-6 py-4 text-slate-500"><%= compl.category %></td>
+              <td class="whitespace-nowrap px-4 py-4 text-slate-500 sm:px-5">
+                <%= compl.category %>
+              </td>
 
               <!-- Status -->
-              <td class="px-6 py-4">
+              <td class="px-4 py-4 sm:px-5">
                 <span
-                  class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700 ring-1 ring-inset ring-amber-200 <%= compl.status === 'Pending' ? 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' : compl.status === 'Resolved' ? 'bg-green-200 text-green-700 ring-1 ring-inset ring-emerald-200' : compl.status === 'Rejected' ? 'bg-red-200 text-red-700 ring-1 ring-inset ring-red-200' : 'bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200' %>"
+                  class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold <%= compl.status === 'Pending' ? 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' : compl.status === 'Resolved' ? 'bg-green-200 text-green-700 ring-1 ring-inset ring-emerald-200' : compl.status === 'Rejected' ? 'bg-red-200 text-red-700 ring-1 ring-inset ring-red-200' : 'bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200' %>"
                 >
                   <span
-                    class="h-1.5 w-1.5 rounded-full bg-amber-500 <%= compl.status === 'Pending' ? 'bg-amber-500' : compl.status === 'Resolved' ? 'bg-green-500' : compl.status === 'Rejected' ? 'bg-red-500' : 'bg-slate-500' %>"
-                  >
-                  </span>
+                    class="h-1.5 w-1.5 rounded-full <%= compl.status === 'Pending' ? 'bg-amber-500' : compl.status === 'Resolved' ? 'bg-green-500' : compl.status === 'Rejected' ? 'bg-red-500' : 'bg-slate-500' %>"
+                  ></span>
                   <%= compl.status %>
                 </span>
               </td>
 
               <!-- Date -->
-              <td class="whitespace-nowrap px-6 py-4 text-slate-500">
+              <td class="whitespace-nowrap px-4 py-4 text-slate-500 sm:px-5">
                 <%= new Date(compl.createdAt).toLocaleDateString("en-GB") %>
               </td>
 
               <!-- Action -->
-              <td class="px-6 py-4 text-right">
+              <td class="whitespace-nowrap px-4 py-4 text-right sm:px-5">
                 <a
                   href="/admin/complaints/<%= compl.id %>"
-                  class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                  class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
                 >
                   View
 
@@ -141,6 +147,14 @@
           </tbody>
         </table>
       </div>
+
+      <!-- Mobile Scroll Hint -->
+      <div
+        class="border-t border-slate-100 bg-slate-50 px-4 py-2.5 text-xs text-slate-400 sm:hidden"
+      >
+        Swipe left or right to view all complaint details.
+      </div>
     </div>
   </div>
 </section>
+```

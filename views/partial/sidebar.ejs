@@ -1,103 +1,86 @@
-<aside class="w-64 shrink-0 bg-blue-950 p-5 text-white">
+<aside class="w-full shrink-0 bg-blue-950 p-4 text-white sm:p-5 lg:w-64">
   <!-- Logo -->
-  <div class="mb-10 flex items-center gap-3 px-2">
-    <div class="rounded-lg bg-white p-2 font-bold text-blue-900">CMS</div>
+  <div class="mb-6 flex items-center gap-3 px-2 sm:mb-8 lg:mb-10">
+    <div class="shrink-0 rounded-lg bg-white p-2 font-bold text-blue-900">
+      CMS
+    </div>
     <span class="text-lg font-semibold">College CMS</span>
   </div>
 
   <!-- Admin Sidebar -->
-
-  <nav class="space-y-2">
+  <nav class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
     <% if(user.role === 'admin'){ %>
     <a
       href="/admin/dashboard"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700' : '' %>"
     >
       ▣ &nbsp; Dashboard
     </a>
 
-    <!-- ----- 02 ---- -->
-
     <a
       href="/admin/complaints"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700' : '' %>"
     >
       ▤ &nbsp; All Complaints
     </a>
 
-    <!-- ---- 03 ---- -->
-
     <% if(activePage === 'detail') {%>
-
     <a
       href="/admin/details-page"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700' : '' %>"
     >
       📑 Detail Page
     </a>
-
     <% } %>
-
-    <!-- ---- 04 ---- -->
 
     <a
       href="/admin/all-students"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'all_students' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'all_students' ? 'bg-blue-700' : '' %>"
     >
       ▤ &nbsp; All Students
     </a>
 
-    <!-- ------ 05 ------ -->
-
     <a
       href="/admin/register"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'register' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'register' ? 'bg-blue-700' : '' %>"
     >
       📝 New Student
     </a>
 
-    <!-- student Sidebar -->
+    <!-- Student Sidebar -->
     <% }else if(user.role === 'student'){ %>
-
     <a
       href="/dashboard"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700' : '' %>"
     >
       ▣ &nbsp; Dashboard
     </a>
 
-    <!-- ----- 02----- -->
     <a
       href="/complaints"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700' : '' %>"
     >
       ▤ &nbsp; My Complaints
     </a>
-    <% } %>
-
-    <!-- ========== Admin Sidebar My Complaints Links =====  -->
-    <% if(title === 'ComplaintDetails'){ %>
-
+    <% } %> <% if(title === 'ComplaintDetails'){ %>
     <a
       href="/"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700' : '' %>"
     >
       📑 Detail Page
     </a>
-
     <% } %> <% if(activePage === 'dinied'){ %>
-
     <a
       href="/admin/dinied-page"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 <%= activePage === 'dinied' ? 'bg-blue-700' : '' %>"
+      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'dinied' ? 'bg-blue-700' : '' %>"
     >
       👨🏽‍⚕️ Profile
     </a>
-
     <% } %>
+
     <a
       href="/profile"
-      class="block rounded-lg px-4 py-3 transition hover:bg-blue-800 mb-0 <%= activePage === 'profile' ? 'bg-blue-700' : '' %>"
+      class="mb-0 block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'profile' ? 'bg-blue-700' : '' %>"
     >
       👨🏽‍⚕️ Profile
     </a>
@@ -105,7 +88,7 @@
     <form action="/logout" method="POST" class="mt-0">
       <button
         type="submit"
-        class="block rounded-lg px-4 py-2 transition hover:bg-blue-800 text-[16px] font-semibold"
+        class="block w-full rounded-lg px-4 py-3 text-left text-sm font-semibold transition hover:bg-blue-800"
       >
         🔓 Logout
       </button>
