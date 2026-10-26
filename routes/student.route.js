@@ -23,10 +23,10 @@ import { authenticated } from "../middlewares/isAdmin.middleware.js";
 import { isStudent } from "../middlewares/isStudent.middleware.js";
 import { checkComplaintValidation } from "../middlewares/check_validation.js";
 import { complaintValidation } from "../validator/complaint.validator.js";
-
+import {checkHomePage} from '../middlewares/homePage.middleware.js'
 
 // Public routes
-router.get("/", landingPage);
+router.get("/", checkHomePage, landingPage);
 router.get("/login", loginPage);
 router.post("/login", loginPageData);
 
