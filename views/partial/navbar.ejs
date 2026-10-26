@@ -1,33 +1,76 @@
 <header
-  class="flex min-h-16 flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3 sm:min-h-20 sm:px-6 lg:px-8"
+  class="relative z-40 flex min-h-16 flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3 sm:min-h-20 sm:px-6 lg:px-8"
 >
-  <h1
-    class="min-w-0 break-words text-lg font-semibold text-slate-800 sm:text-xl lg:text-2xl"
-  >
-    <%= title || "College CMS" %>
-  </h1>
+  <!-- Left: Menu Button + Page Title -->
+  <div class="flex min-w-0 flex-1 items-center gap-3">
+    <!-- Hamburger Button -->
+    <button
+      type="button"
+      id="sidebarToggle"
+      aria-label="Open sidebar"
+      aria-controls="sidebar"
+      aria-expanded="false"
+      class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-100 focus:outline-none focus:ring-4 focus:ring-blue-100 lg:hidden"
+    >
+      <svg
+        id="menuIcon"
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
 
-  <div class="flex items-center gap-3 sm:gap-5">
+    <!-- Page Title -->
+    <h1
+      class="min-w-0 break-words text-lg font-semibold text-slate-800 sm:text-xl lg:text-2xl"
+    >
+      <%= title || "College CMS" %>
+    </h1>
+  </div>
+
+  <!-- Right: User Information -->
+  <div class="flex shrink-0 items-center gap-3 sm:gap-5">
     <% if (user && user.name) { %>
-    <div class="flex min-w-0 items-center gap-3">
-      <div class="min-w-0">
-        <p class="break-words text-sm font-bold text-slate-800 sm:text-base">
+
+    <div class="flex min-w-0 items-center gap-2 sm:gap-3">
+      <!-- User Avatar -->
+      <div
+        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-bold text-blue-700 sm:h-10 sm:w-10"
+      >
+        <%= user.name.trim().split(/\s+/).map(word =>
+        word[0].toUpperCase()).slice(0, 2).join('') %>
+      </div>
+
+      <div class="hidden min-w-0 sm:block">
+        <p class="max-w-40 break-words text-sm font-bold text-slate-800">
           <%= user.name.charAt(0).toUpperCase() +
           user.name.slice(1).toLowerCase() %>!
         </p>
+
         <p class="text-xs capitalize text-slate-500 sm:text-sm">
           <%= user.role || "Student" %>
         </p>
       </div>
     </div>
+
     <% } else { %>
-    <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+
+    <div class="flex items-center gap-2 sm:gap-3">
       <a
         href="/login"
         class="text-sm font-medium text-slate-600 transition hover:text-blue-600"
       >
         Login
       </a>
+
       <a
         href="/register"
         class="rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 sm:px-4"
@@ -35,6 +78,99 @@
         Register
       </a>
     </div>
+
     <% } %>
   </div>
 </header>
+
+<!-- Mobile Sidebar Toggle Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sidebar");
+    const toggle = document.getElementById("sidebarToggle");
+    const menuIcon = document.getElementById("menuIcon");
+    const overlay = document.getElementById("sidebarOverlay");
+
+    if (!sidebar || !toggle) return;
+
+    function openSidebar() {
+      sidebar.classList.remove("-translate-x-full");
+      sidebar.classList.add("translate-x-0");
+
+      if (overlay) {
+        overlay.classList.remove("hidden");
+      }
+
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close sidebar");
+
+      menuIcon.innerHTML =
+        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.add("-translate-x-full");
+      sidebar.classList.remove("translate-x-0");
+
+      if (overlay) {
+        overlay.classList.add("hidden");
+      }
+
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open sidebar");
+
+      menuIcon.innerHTML =
+        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+    }
+
+    toggle.addEventListener("click", function () {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+
+      if (isOpen) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+
+    if (overlay) {
+      overlay.addEventListener("click", closeSidebar);
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeSidebar();
+      }
+    });
+
+    // Close the mobile sidebar when a navigation link is selected.
+    sidebar.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (window.innerWidth < 1024) {
+          closeSidebar();
+        }
+      });
+    });
+
+    // Reset sidebar visibility when returning to desktop width.
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 1024) {
+        sidebar.classList.remove("-translate-x-full");
+        sidebar.classList.add("translate-x-0");
+
+        if (overlay) {
+          overlay.classList.add("hidden");
+        }
+
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open sidebar");
+
+        menuIcon.innerHTML =
+          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+      } else if (toggle.getAttribute("aria-expanded") !== "true") {
+        sidebar.classList.add("-translate-x-full");
+        sidebar.classList.remove("translate-x-0");
+      }
+    });
+  });
+</script>

@@ -1,97 +1,319 @@
-<aside class="w-full shrink-0 bg-blue-950 p-4 text-white sm:p-5 lg:w-64">
-  <!-- Logo -->
-  <div class="mb-6 flex items-center gap-3 px-2 sm:mb-8 lg:mb-10">
-    <div class="shrink-0 rounded-lg bg-white p-2 font-bold text-blue-900">
-      CMS
-    </div>
-    <span class="text-lg font-semibold">College CMS</span>
+<!-- Mobile Sidebar Overlay -->
+<div
+  id="sidebarOverlay"
+  class="fixed inset-0 z-40 hidden bg-slate-950/50 backdrop-blur-[2px] lg:hidden"
+></div>
+
+<aside
+  id="sidebar"
+  class="fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-blue-950 p-4 text-white shadow-2xl transition-transform duration-300 ease-in-out sm:p-5 lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:max-w-none lg:translate-x-0 lg:shadow-none"
+>
+  <!-- Logo + Mobile Close Button -->
+  <div
+    class="mb-6 flex items-center justify-between gap-3 px-2 sm:mb-8 lg:mb-10"
+  >
+    <a
+      href="/"
+      class="flex min-w-0 items-center gap-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+    >
+      <!-- Home Icon -->
+      <div
+        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-blue-900 shadow-sm"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+            d="M3 10.5L12 3l9 7.5M5.5 9v11h13V9M9 20v-6h6v6"
+          />
+        </svg>
+      </div>
+
+      <div class="min-w-0">
+        <span class="block truncate text-base font-bold tracking-wide">
+          College CMS
+        </span>
+        <span class="mt-0.5 block text-xs text-blue-200">
+          Complaint Management
+        </span>
+      </div>
+    </a>
+
+    <!-- Close Button: Mobile Only -->
+    <button
+      type="button"
+      onclick="document.getElementById('sidebarToggle').click()"
+      aria-label="Close sidebar"
+      class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-blue-100 transition hover:bg-blue-800 hover:text-white lg:hidden"
+    >
+      <svg
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
   </div>
 
-  <!-- Admin Sidebar -->
-  <nav class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
+  <!-- Navigation Label -->
+  <p
+    class="mb-3 px-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-300"
+  >
+    Navigation
+  </p>
+
+  <!-- Navigation Links -->
+  <nav class="flex flex-1 flex-col gap-1.5">
     <% if(user.role === 'admin'){ %>
+
     <a
       href="/admin/dashboard"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      ▣ &nbsp; Dashboard
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <rect x="3" y="3" width="7" height="7" rx="1.5" stroke-width="1.8" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" stroke-width="1.8" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" stroke-width="1.8" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" stroke-width="1.8" />
+      </svg>
+      Dashboard
     </a>
 
     <a
       href="/admin/complaints"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      ▤ &nbsp; All Complaints
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
+        />
+      </svg>
+      All Complaints
     </a>
 
     <% if(activePage === 'detail') {%>
     <a
       href="/admin/details-page"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      📑 Detail Page
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M7 3h7l5 5v13H7a2 2 0 01-2-2V5a2 2 0 012-2z"
+        />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M14 3v5h5M9 13h6M9 17h6"
+        />
+      </svg>
+      Detail Page
     </a>
     <% } %>
 
     <a
       href="/admin/all-students"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'all_students' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'all_students' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      ▤ &nbsp; All Students
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M10 11a4 4 0 100-8 4 4 0 000 8zM20 8v6M23 11h-6"
+        />
+      </svg>
+      All Students
     </a>
 
     <a
       href="/admin/register"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'register' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'register' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      📝 New Student
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M12 5v14M5 12h14"
+        />
+        <circle cx="12" cy="12" r="9" stroke-width="1.8" />
+      </svg>
+      New Student
     </a>
 
     <!-- Student Sidebar -->
     <% }else if(user.role === 'student'){ %>
+
     <a
       href="/dashboard"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'dashboard' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      ▣ &nbsp; Dashboard
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <rect x="3" y="3" width="7" height="7" rx="1.5" stroke-width="1.8" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" stroke-width="1.8" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" stroke-width="1.8" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" stroke-width="1.8" />
+      </svg>
+      Dashboard
     </a>
 
     <a
       href="/complaints"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'complaints' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      ▤ &nbsp; My Complaints
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2zM9 8h6M9 12h6M9 16h4"
+        />
+      </svg>
+      My Complaints
     </a>
+
     <% } %> <% if(title === 'ComplaintDetails'){ %>
     <a
       href="/"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'detail' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      📑 Detail Page
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M7 3h7l5 5v13H7a2 2 0 01-2-2V5a2 2 0 012-2zM14 3v5h5"
+        />
+      </svg>
+      Detail Page
     </a>
     <% } %> <% if(activePage === 'dinied'){ %>
     <a
       href="/admin/dinied-page"
-      class="block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'dinied' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'dinied' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      👨🏽‍⚕️ Profile
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M10 11a4 4 0 100-8 4 4 0 000 8z"
+        />
+      </svg>
+      Profile
     </a>
     <% } %>
 
+    <!-- Profile -->
     <a
       href="/profile"
-      class="mb-0 block rounded-lg px-4 py-3 text-sm transition hover:bg-blue-800 <%= activePage === 'profile' ? 'bg-blue-700' : '' %>"
+      class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-blue-800 <%= activePage === 'profile' ? 'bg-blue-700 text-white shadow-sm' : 'text-blue-100' %>"
     >
-      👨🏽‍⚕️ Profile
+      <svg
+        class="h-5 w-5 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="8" r="4" stroke-width="1.8" />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M4 21a8 8 0 0116 0"
+        />
+      </svg>
+      Profile
     </a>
 
-    <form action="/logout" method="POST" class="mt-0">
-      <button
-        type="submit"
-        class="block w-full rounded-lg px-4 py-3 text-left text-sm font-semibold transition hover:bg-blue-800"
-      >
-        🔓 Logout
-      </button>
-    </form>
+    <!-- Logout -->
+    <div class="mt-auto border-t border-blue-800 pt-4 lg:mt-8">
+      <form action="/logout" method="POST">
+        <button
+          type="submit"
+          class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-semibold text-blue-100 transition hover:bg-red-500/15 hover:text-red-200"
+        >
+          <svg
+            class="h-5 w-5 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+              d="M10 17l5-5-5-5M15 12H3M21 3v18"
+            />
+          </svg>
+          Logout
+        </button>
+      </form>
+    </div>
   </nav>
 </aside>
